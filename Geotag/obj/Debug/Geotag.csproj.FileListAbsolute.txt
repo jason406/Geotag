@@ -1,1 +1,10 @@
 C:\Users\zsh\Source\Repos\Geotag images\Geotag\Geotag\bin\Debug\Geotag.exe.config
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\bin\Debug\Geotag.exe.config
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.csprojResolveAssemblyReference.cache
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.Form1.resources
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.Properties.Resources.resources
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.csproj.GenerateResource.Cache
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\bin\Debug\Geotag.exe
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\bin\Debug\Geotag.pdb
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.exe
+C:\Users\zsh\Documents\GitHub\Geotag\Geotag\obj\Debug\Geotag.pdb
