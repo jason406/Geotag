@@ -30,6 +30,7 @@ namespace Geotag
         int imageNum,imageSum;
         int folderCount, processedImageCount = 0;
         string currentWorkingPath;
+        string currentWorkingFolderName;
         PosReader mposReader;
         
         public Form1()
@@ -95,8 +96,8 @@ namespace Geotag
 
                     // Save file into Geotag folder
                     //string rootFolder = TXT_jpgdir.Text;
-                    
-                    string geoTagFolder = currentWorkingPath + Path.DirectorySeparatorChar + "geotagged";
+
+                    string geoTagFolder = foldPath + "_geotagged" + Path.DirectorySeparatorChar + currentWorkingFolderName;
 
                     string outputfilename = geoTagFolder + Path.DirectorySeparatorChar +
                                             Path.GetFileNameWithoutExtension(Filename) + "_geotag" +
@@ -135,8 +136,7 @@ namespace Geotag
         }
 
         private void workingFolder_Click(object sender, EventArgs e)
-        {
-            
+        {            
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.SelectedPath = "C:\\Work\\Photo data\\geotag test";
             dialog.Description = "请选择工作路径";
@@ -144,8 +144,15 @@ namespace Geotag
             {
                 foldPath = dialog.SelectedPath;
                 TXT_workPath.Text = foldPath;
+                string txtPath = foldPath + Path.DirectorySeparatorChar + "pos.txt";
+                if (!File.Exists(txtPath))
+                {
+                    MessageBox.Show("pos.txt not found in  " + foldPath,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
                 mposReader = new PosReader(foldPath);
                 this.imageNum = mposReader.getImageCount();
+                
             }
         }
 
@@ -175,8 +182,10 @@ namespace Geotag
             foreach (DirectoryInfo s_di in subDi)
             {
                 currentWorkingPath = s_di.FullName;
-                string geoTagFolder = currentWorkingPath + Path.DirectorySeparatorChar + "geotagged";
-
+                //string geoTagFolder = currentWorkingPath + Path.DirectorySeparatorChar + "geotagged";
+                currentWorkingFolderName = currentWorkingPath.Substring(currentWorkingPath.LastIndexOf("\\")+1);
+                //string geoTagFolder = foldPath + Path.DirectorySeparatorChar + "geotagged" + Path.DirectorySeparatorChar + currentWorkingFolderName;
+                string geoTagFolder = foldPath+"_geotagged" + Path.DirectorySeparatorChar+ currentWorkingFolderName;
                 bool isExists = System.IO.Directory.Exists(geoTagFolder);
 
                 // delete old files and folder
@@ -198,7 +207,9 @@ namespace Geotag
                 }                
             }
             TXT_outputlog.AppendText("Geotag finished " + "\n");
+            TXT_outputlog.AppendText("Images saved to " + foldPath + "_geotagged\n");
             MessageBox.Show("Geotag finished");
+            System.Diagnostics.Process.Start("explorer.exe", foldPath + "_geotagged");
         }
         /// <summary>
         /// check if the amount of files equals to given number
